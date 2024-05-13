@@ -3,7 +3,7 @@
 # connected through ZHA.
 
 blueprint:
-  source_url: https://github.com/niro1987/homeassistant-config/blob/main/blueprints/automation/niro1987/zha_ikea_tradfri_2button_remote_custom.yaml
+  source_url: https://github.com/jannikbryld/homeassistant-config/blob/main/blueprints/Tr%C3%A5dfri%20-%202%20button%20cover%20remote.yaml
 
   name: ZHA - IKEA TRADFRI - 2 Button Remote - Custom Actions
 
@@ -63,25 +63,25 @@ action:
       - conditions:
           - condition: template
             value_template: '{{ trigger.event.data.command == "on" }}'
-        sequence: !input on_short
+        sequence: !input up_open
 
       # Long-Press the on button
       - conditions:
           - condition: template
             value_template: '{{ trigger.event.data.command == "move_with_on_off" }}'
-        sequence: !input on_long
+        sequence: !input stop_opening
 
       # Short-Press the off button
       - conditions:
           - condition: template
             value_template: '{{ trigger.event.data.command == "off" }}'
-        sequence: !input off_short
+        sequence: !input down_close
 
       # Long-Press the off button
       - conditions:
           - condition: template
             value_template: '{{ trigger.event.data.command == "move" }}'
-        sequence: !input off_long
+        sequence: !input stop_closing
 
     # Any other event will cancel the repeat loops (i.e. releasing the [on|off] button)
     default: []
