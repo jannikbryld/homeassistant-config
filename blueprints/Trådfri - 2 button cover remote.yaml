@@ -5,10 +5,10 @@
 blueprint:
   source_url: https://github.com/jannikbryld/homeassistant-config/blob/main/blueprints/Tr%C3%A5dfri%20-%202%20button%20cover%20remote.yaml
 
-  name: ZHA - IKEA TRADFRI - 2 Button Remote - Custom Actions
+  name: ZHA - IKEA TRADFRI - 2 Button Open/Close Remote - Custom Actions
 
   description: >-
-    This automation simulates the use of the IKEA TRADFRI on/off switch
+    This automation simulates the use of the IKEA TRADFRI open/close switch
     connected through ZHA.
 
   domain: automation
@@ -62,25 +62,25 @@ action:
       # Short-Press the on button
       - conditions:
           - condition: template
-            value_template: '{{ trigger.event.data.command == "on" }}'
+            value_template: '{{ trigger.event.data.command == "up_open" }}'
         sequence: !input up_open
 
       # Long-Press the on button
       - conditions:
           - condition: template
-            value_template: '{{ trigger.event.data.command == "move_with_on_off" }}'
+            value_template: '{{ trigger.event.data.command == "stop_opening" }}'
         sequence: !input stop_opening
 
       # Short-Press the off button
       - conditions:
           - condition: template
-            value_template: '{{ trigger.event.data.command == "off" }}'
+            value_template: '{{ trigger.event.data.command == "down_close" }}'
         sequence: !input down_close
 
       # Long-Press the off button
       - conditions:
           - condition: template
-            value_template: '{{ trigger.event.data.command == "move" }}'
+            value_template: '{{ trigger.event.data.command == "stop_closing" }}'
         sequence: !input stop_closing
 
     # Any other event will cancel the repeat loops (i.e. releasing the [on|off] button)
